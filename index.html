@@ -2,165 +2,286 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Journey</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Tahoma, Arial;
-}
-
-/* خلفية مع بلور */
 body{
+  margin:0;
+  font-family:Arial;
+  color:white;
+  text-align:center;
   min-height:100vh;
-  background:url('https://wallpapers.com/images/hd/simple-4k-ultra-hd-christmas-ball-5dn9ll4m5569az4q.jpg') center/cover fixed no-repeat;
+  overflow-x:hidden;
   position:relative;
 }
 
-body::before{
+/* الخلفية مع بلور */
+body::before {
   content:"";
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.45);
-  backdrop-filter:blur(6px);
-  z-index:-1;
+  background: url("https://wallpapers.com/images/hd/simple-4k-ultra-hd-christmas-ball-5dn9ll4m5569az4q.jpg") no-repeat center center/cover;
+  filter: blur(25px);
+  z-index:0;
 }
 
-/* Snow */
-.snow{
+/* الثلج المتحرك */
+.snow {
   position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
   pointer-events:none;
+  background-image:
+    radial-gradient(2px 2px at 20px 20px, #fff, transparent),
+    radial-gradient(3px 3px at 100px 50px, #fff, transparent),
+    radial-gradient(2px 2px at 200px 150px, #fff, transparent),
+    radial-gradient(3px 3px at 300px 80px, #fff, transparent),
+    radial-gradient(2px 2px at 400px 200px, #fff, transparent),
+    radial-gradient(3px 3px at 500px 100px, #fff, transparent);
+  background-size: 600px 600px;
+  animation: snow 10s linear infinite;
   z-index:1;
 }
 
-/* Container */
+@keyframes snow{
+  0%{ transform: translateY(-100px); }
+  100%{ transform: translateY(600px); }
+}
+
+/* صندوق مركزي فوق الثلج */
 .container{
   max-width:700px;
-  margin:0 auto;
-  padding:20px 15px 80px;
-  color:#fff;
-  text-align:center;
+  margin:auto;
+  padding:20px;
   position:relative;
   z-index:2;
 }
 
-/* البوكس الأحمر */
-.red-box{
-  background:rgba(180,0,0,0.9);
-  border:2px solid #ffcccc;
-  border-radius:16px;
-  padding:18px;
-  margin:20px 0;
-  line-height:1.7;
-  box-shadow:0 0 15px rgba(0,0,0,0.35);
+#passwordScreen, #messageScreen, #galleryScreen, #endingScreen{
+  display:none;
 }
+.screen{ padding-top:60px;}
 
-/* Buttons */
-button{
-  padding:12px 20px;
+input{
+  padding:10px;
+  border-radius:8px;
   border:none;
-  border-radius:30px;
-  background:#ffd000;
-  color:#222;
+  outline:none;
   font-size:16px;
+  width:80%;
+  max-width:300px;
+}
+
+button{
+  padding:10px 18px;
+  border-radius:10px;
+  border:none;
   cursor:pointer;
+  font-size:16px;
+  background:#ff4d6d;
+  color:white;
   margin-top:10px;
-  box-shadow:0 5px 12px rgba(0,0,0,0.25);
-  transition:0.2s;
-}
-button:hover{
-  transform:scale(1.05);
 }
 
-/* Password */
-#passwordScreen{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.8);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:10;
-}
-
-#passwordBox{
-  background:#fff;
-  color:#000;
-  padding:25px;
-  border-radius:18px;
-  width:90%;
-  max-width:380px;
+/* بوكس الرسالة */
+.message-box{
+  background: linear-gradient(135deg, #ff4d6d, #ff1a4d);
+  border-radius:20px;
+  padding:25px 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  display:inline-block;
+  max-width:90%;
+  color:white;
   text-align:center;
+  animation: appear 1s ease-out;
 }
 
-/* Gallery items */
-.item{
+@keyframes appear {
+  0% { transform: translateY(-20px); opacity:0; }
+  100% { transform: translateY(0); opacity:1; }
+}
+
+/* الجاليري */
+.gallery > div{
   margin:25px 0;
-}
-
-.item img,
-.item video{
-  width:100%;
+  background:rgba(0,0,0,.25);
   border-radius:16px;
-  box-shadow:0 0 20px rgba(0,0,0,0.4);
+  padding:12px;
 }
 
-/* Audio box */
+.gallery img, .gallery video, .audio-player audio{
+  max-width:100%;
+  height:auto;
+  border-radius:14px;
+}
+
+.caption{
+  margin-top:8px;
+  opacity:.9;
+  font-size:15px;
+}
+
+/* مشغل صوت */
 .audio-player{
   margin:20px 0;
 }
 
-/* زرار النهاية */
-#endBtn{
-  display:none;
-  margin-top:25px;
-  background:#ff4444;
-  color:#fff;
+/* Ending */
+#endingScreen{
+  font-size:20px;
+  line-height:1.7;
 }
 
-/* للموبايل */
-@media(max-width:600px){
-  .red-box{font-size:14px;}
+/* تعديل للشاشات الصغيرة */
+@media screen and (max-width: 600px) {
+  .message-box {
+    padding:15px 10px;
+    font-size:14px;
+  }
+  button {
+    font-size:14px;
+    padding:8px 12px;
+  }
+  .caption {
+    font-size:13px;
+  }
 }
-
 </style>
 </head>
+
 <body>
 
-<canvas class="snow"></canvas>
-
-<!-- شاشة الباسورد -->
-<div id="passwordScreen">
-  <div id="passwordBox">
-    <h3>ادخل الباسورد 😊</h3>
-    <input type="password" id="pass" style="padding:10px;margin-top:10px;width:100%;border-radius:10px;border:1px solid #ccc">
-    <button onclick="checkPass()">دخول</button>
-    <p id="err" style="color:red;margin-top:10px;display:none;">الباسورد غلط</p>
-  </div>
-</div>
+<!-- الثلج -->
+<div class="snow"></div>
 
 <div class="container">
 
-  <!-- رسالة البداية -->
-  <div class="red-box" id="introBox">
-    <h3>❤️ رسالة صغيرة قبل ما نبدأ الرحلة ❤️</h3>
-    <p>
-      هنا بتحصل أحلى الذكريات… خطوة خطوة…
-      جهزي نفسك 💫
-    </p>
+  <!-- شاشة الباسورد -->
+  <div id="passwordScreen" class="screen" style="display:block;">
+    <h2>ادخل الباسورد</h2>
+    <p>🧡</p>
+    <input id="passInput" placeholder="اكتب هنا">
+    <br>
+    <button onclick="checkPass()">Enter</button>
+    <p id="wrong" style="color:#ffb3b3;display:none;">غلط 😅 جرّب تاني</p>
   </div>
 
-  <button id="startBtn" onclick="startJourney()" style="display:none;">
-    Start the Journey
-  </button>
+  <!-- رسالة البداية -->
+  <div id="messageScreen" class="screen">
+    <div class="message-box">
+      <h2>رسالة صغيرة قبل الرحلة 💌</h2>
+      <p>
+30/5/2025 ابتدت رحلتنا سوا كنتي مسنتراني يومها و مكنتش عارف أشوف غيرك ف الفرح ولا أركز مع حد غير معاكي ❤️
+5/6/2025 أول يوم بقينا فيه مع بعض و معترفين لبعض اننا بنحب بعض ✨❤️
+دول أهم تاريخين ف حياتي و انتي أهم حد دخل حياتي رحلتنا كبيرة كان فيها فرح و زعل و ضحك و عياط و حب كبير اووي أنا بجد مبسوط إنك معايا و بجد عايزك معايا ل باقي العمر و بتمنى من ربنا و بدعي كل يوم إنك تكوني لياا و معايا 🤲🏼 عارف زعلتك كتير و اتضايقتي مني كتير وإنتي كمان بس مفيش حاجه هتقدر تبعدنا عن بعض و ربنا يخليكي لياا يا أحلى حاجه ف الدنيا ❤️❤️
+      </p>
+      <button onclick="startJourney()">Start a journey ➜</button>
+    </div>
+  </div>
 
-  <!-- الأغنية -->
-  <div class="audio-player" id="audioBox" style="display:none;">
-    <h3>🎵 أغنيتنا</h3>
-    <audio controls loop>
-      <source src="1.mp3" type="
+  <!-- الجاليري -->
+  <div id="galleryScreen" class="screen">
+
+    <!-- الأغنية -->
+    <h3>🎵 اكتر اغنية بتوصفنا</h3>
+    <div class="audio-player">
+      <audio controls>
+        <source src="1.mp3" type="audio/mpeg">
+        متصفحك مش بيدعم مشغل الصوت 😅
+      </audio>
+    </div>
+
+    <div class="gallery">
+      <div>
+        <img src="i1.jpg">
+        <p class="caption">أول يوم اتقابلنا فيه ❤️</p>
+      </div>
+
+      <div>
+        <video src="v1.mp4" controls></video>
+        <p class="caption">اكتر فيديو بيضحك لينا 🎥</p>
+      </div>
+
+      <div>
+        <img src="i2.jpg">
+        <p class="caption">تاني صورة لينا ✨</p>
+      </div>
+
+      <div>
+        <video src="v2.mp4" controls></video>
+        <p class="caption">أكتر فيديو بحبه لينا 💖</p>
+      </div>
+
+      <div>
+        <img src="i3.jpg">
+        <p class="caption">اول تغفيلة تغفلهالي 😌</p>
+      </div>
+
+      <div>
+        <video src="v3.mp4" controls></video>
+        <p class="caption">اكتر فيديو بيفكرني ب يوم حلو 😄</p>
+      </div>
+
+      <div>
+        <img src="i4.jpg">
+        <p class="caption">اكتر صورة بحب شكلك فيها 😌</p>
+      </div>
+
+      <div>
+        <img src="i5.jpg">
+        <p class="caption">و دي اكتر صورة انتي بتحبيها لينا ❤️</p>
+      </div>
+
+      <div>
+        <video src="v4.mp4" controls></video>
+        <p class="caption">الفيديو ده انا كنت بتكلم فيه بجد عمتا 😄</p>
+      </div>
+
+      <div>
+        <img src="i6.jpg">
+        <p class="caption">و ده اخر يوم احنا اتصورنا فيه سوا كنتي حلوه اووي ❤️</p>
+      </div>
+    </div>
+
+    <button onclick="showEnding()">أنهي الرحلة 🎁</button>
+  </div>
+
+  <!-- النهاية -->
+  <div id="endingScreen" class="screen">
+    <div class="message-box">
+      <p>شكراً إنك شاركتيني الرحلة دي 💫</p>
+      <p>🎄 Merry Christmas 2026 🎄</p>
+      <p>وبحبك جداا وبحب كل ايامنا سوا بحبك لما بتدلعي عليا وبتقلبي طفله وبحب اشوف شكلك لما بجيبلك حاجه حلوا ولمعة عينك لما بنشوف بعض بوعدك اني هفضل معاكي واني عمري ما هسيبك ابدا ..بجد شكرا انك معايا 😌❤️</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function checkPass(){
+  const v = document.getElementById("passInput").value.trim();
+  if(v === "28611"){
+    document.getElementById("passwordScreen").style.display="none";
+    document.getElementById("messageScreen").style.display="block";
+  } else {
+    document.getElementById("wrong").style.display="block";
+  }
+}
+
+function startJourney(){
+  document.getElementById("messageScreen").style.display="none";
+  document.getElementById("galleryScreen").style.display="block";
+  window.scrollTo(0,0);
+}
+
+function showEnding(){
+  document.getElementById("galleryScreen").style.display="none";
+  document.getElementById("endingScreen").style.display="block";
+}
+</script>
+
+</body>
+</html>
