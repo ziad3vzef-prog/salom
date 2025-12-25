@@ -11,9 +11,19 @@ body{
   font-family:Arial;
   color:white;
   text-align:center;
-  background: url("https://wallpapers.com/images/hd/simple-4k-ultra-hd-christmas-ball-5dn9ll4m5569az4q.jpg") no-repeat center center/cover;
   min-height:100vh;
   overflow-x:hidden;
+  position:relative;
+}
+
+/* الخلفية مع بلور */
+body::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  background: url("https://wallpapers.com/images/hd/simple-4k-ultra-hd-christmas-ball-5dn9ll4m5569az4q.jpg") no-repeat center center/cover;
+  filter: blur(25px);
+  z-index:0;
 }
 
 /* الثلج المتحرك */
@@ -77,7 +87,7 @@ button{
 }
 
 /* بوكس الرسالة قبل الرحلة */
-#messageScreen .message-box{
+.message-box{
   background: linear-gradient(135deg, #ff4d6d, #ff1a4d);
   border-radius:20px;
   padding:25px 20px;
@@ -102,7 +112,7 @@ button{
   padding:12px;
 }
 
-.gallery img, .gallery video, .audio-player audio{
+.gallery img, .gallery video, .audio-player img, .audio-player audio{
   max-width:100%;
   height:auto;
   border-radius:14px;
@@ -117,6 +127,9 @@ button{
 /* مشغل صوت */
 .audio-player{
   margin:20px 0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
 /* Ending */
@@ -127,7 +140,7 @@ button{
 
 /* تعديل للشاشات الصغيرة */
 @media screen and (max-width: 600px) {
-  #messageScreen .message-box {
+  .message-box {
     padding:15px 10px;
     font-size:14px;
   }
@@ -178,7 +191,10 @@ button{
     <!-- الأغنية -->
     <h3>🎵 اكتر اغنية بتوصفنا</h3>
     <div class="audio-player">
-      <audio controls autoplay loop>
+      <!-- صورة الأغنية -->
+      <img src="cov.jpg" alt="اغنية أنا والقمر" style="max-width:200px; border-radius:12px; margin-bottom:10px;">
+      <!-- مشغل الصوت -->
+      <audio controls loop>
         <source src="1.mp3" type="audio/mpeg">
         متصفحك مش بيدعم مشغل الصوت 😅
       </audio>
@@ -242,9 +258,11 @@ button{
 
   <!-- النهاية -->
   <div id="endingScreen" class="screen">
-    <p>شكراً إنك شاركتيني الرحلة دي 💫</p>
-    <p>🎄 Merry Christmas 2026 🎄</p>
-    <p>وبحبك جداا وبحب كل ايامنا سوا بحبك لما بتدلعي عليا وبتقلبي طفله وبحب اشوف شكلك لما بجيبلك حاجه حلوا ولمعة عينك لما بنشوف بعض بوعدك اني هفضل معاكي واني عمري ما هسيبك ابدا ..بجد شكرا انك معايا 😌❤️</p>
+    <div class="message-box">
+      <p>شكراً إنك شاركتيني الرحلة دي 💫</p>
+      <p>🎄 Merry Christmas 2026 🎄</p>
+      <p>وبحبك جداا وبحب كل ايامنا سوا بحبك لما بتدلعي عليا وبتقلبي طفله وبحب اشوف شكلك لما بجيبلك حاجه حلوا ولمعة عينك لما بنشوف بعض بوعدك اني هفضل معاكي واني عمري ما هسيبك ابدا ..بجد شكرا انك معايا 😌❤️</p>
+    </div>
   </div>
 
 </div>
