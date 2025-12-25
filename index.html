@@ -61,6 +61,8 @@ input{
   border:none;
   outline:none;
   font-size:16px;
+  width:80%;
+  max-width:300px;
 }
 
 button{
@@ -100,8 +102,9 @@ button{
   padding:12px;
 }
 
-.gallery img, .gallery video{
+.gallery img, .gallery video, .audio-player audio{
   max-width:100%;
+  height:auto;
   border-radius:14px;
 }
 
@@ -120,6 +123,21 @@ button{
 #endingScreen{
   font-size:20px;
   line-height:1.7;
+}
+
+/* تعديل للشاشات الصغيرة */
+@media screen and (max-width: 600px) {
+  #messageScreen .message-box {
+    padding:15px 10px;
+    font-size:14px;
+  }
+  button {
+    font-size:14px;
+    padding:8px 12px;
+  }
+  .caption {
+    font-size:13px;
+  }
 }
 </style>
 </head>
@@ -203,17 +221,15 @@ button{
         <p class="caption">اكتر صورة بحب شكلك فيها 😌</p>
       </div>
 
-  <div>
+      <div>
         <img src="i5.jpg">
         <p class="caption">و دي اكتر صورة انتي بتحبيها لينا ❤️</p>
       </div>
-    </div>
-	
-   <div>
+
+      <div>
         <video src="v4.mp4" controls></video>
         <p class="caption">الفيديو ده انا كنت بتكلم فيه بجد عمتا 😄</p>
       </div>
-
 
       <div>
         <img src="i6.jpg">
